@@ -104,6 +104,28 @@ namespace NeuralNetworkTest.MatrixHelper
             return resultMatrix;
         }
 
+        public Matrix HadamardProduct(Matrix secondMatrix)
+        {
+            Matrix resultMatrix = new Matrix();
+            int mFirstRowCount = matrixData.Count;
+            int mFirstColCount = matrixData[0].matrixColData.Count;
+            int mSecondRowCount = secondMatrix.matrixData.Count;
+            int mSecondColCount = secondMatrix.matrixData[0].matrixColData.Count;
+
+            if (mFirstRowCount == mSecondRowCount && mFirstColCount == mSecondColCount)
+            {
+                for (int i = 0; i < mFirstRowCount; i++)
+                {
+                    for (int j = 0; j < mFirstColCount; j++)
+                    {
+                        resultMatrix.matrixData[i].matrixColData[j].mdata = matrixData[i].matrixColData[j].mdata * secondMatrix.matrixData[i].matrixColData[j].mdata;
+                    }
+                }
+            }
+
+            return resultMatrix;
+        }
+
     }
 
     public class MatrixRow
