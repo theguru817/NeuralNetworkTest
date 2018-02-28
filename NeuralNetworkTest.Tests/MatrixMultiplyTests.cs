@@ -44,7 +44,7 @@ namespace NeuralNetworkTest.Tests
             MatrixHelper.Matrix result = firstMatrix.DotMultiply(secondMatrix);
             MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
 
-            Assert.AreEqual(result, correctMatrix);
+            Assert.AreEqual(correctMatrix,result);
         }
 
         [TestMethod]
@@ -54,9 +54,9 @@ namespace NeuralNetworkTest.Tests
                 new double[] { 3, 2, 4 },
                 new double[] { 6, 8, 9 }
             };
-            double[][] secondMatrixArray = new double[][] { new double[] { -14/55, 11/55, 6/55 },
-                    new double[] { -3/55, -33/55, 17/55 },
-                    new double[] { 12/55, 22/55, -13/55 }
+            double[][] secondMatrixArray = new double[][] { new double[] { -14.0/55.0, 11.0/55.0, 6.0/55.0 },
+                    new double[] { -3.0/55.0, -33.0/55.0, 17.0/55.0 },
+                    new double[] { 12.0/55.0, 22.0/55.0, -13.0/55.0 }
             };
             double[][] correctMatrixArray = new double[][] { new double[] { 1, 0, 0 },
                 new double[] { 0, 1, 0 },
@@ -67,7 +67,7 @@ namespace NeuralNetworkTest.Tests
             MatrixHelper.Matrix result = firstMatrix.DotMultiply(secondMatrix);
             MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
 
-            Assert.AreEqual(result, correctMatrix);
+            Assert.AreEqual(correctMatrix, result);
         }
 
         [TestMethod]
@@ -75,18 +75,18 @@ namespace NeuralNetworkTest.Tests
         {
             double[][] firstMatrixArray = new double[][] { new double[] { -14, 11, 6 },
                 new double[] { -3, -33, 17 },
-                new double[] { 12, 22, 55 }
+                new double[] { 12, 22, -13 }
             };
-            double scalarFactor = 55;
-            double[][] correctMatrixArray = new double[][] { new double[] { -14/55, 11/55, 6/55 },
-                    new double[] { -3/55, -33/55, 17/55 },
-                    new double[] { 12/55, 22/55, -13/55 }
+            double scalarFactor = 1.0/55.0;
+            double[][] correctMatrixArray = new double[][] { new double[] { -14.0/55.0, 11.0/55.0, 6.0/55.0 },
+                    new double[] { -3.0/55.0, -33.0/55.0, 17.0/55.0 },
+                    new double[] { 12.0/55.0, 22.0/55.0, -13.0/55.0 }
             };
             MatrixHelper.Matrix firstMatrix = new MatrixHelper.Matrix(firstMatrixArray);
             firstMatrix.ScalarMultiply(scalarFactor);
             MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
 
-            Assert.AreEqual(firstMatrix, correctMatrix);
+            Assert.AreEqual(correctMatrix,firstMatrix);
         }
 
         [TestMethod]
@@ -106,10 +106,10 @@ namespace NeuralNetworkTest.Tests
             };
             MatrixHelper.Matrix firstMatrix = new MatrixHelper.Matrix(firstMatrixArray);
             MatrixHelper.Matrix secondMatrix = new MatrixHelper.Matrix(secondMatrixArray);
-            MatrixHelper.Matrix result = firstMatrix.DotMultiply(secondMatrix);
+            MatrixHelper.Matrix result = firstMatrix.HadamardProduct(secondMatrix);
             MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
 
-            Assert.AreEqual(result, correctMatrix);
+            Assert.AreEqual(correctMatrix, result);
         }
     }
 }

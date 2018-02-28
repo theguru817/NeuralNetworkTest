@@ -44,8 +44,9 @@ namespace NeuralNetworkTest.Tests
             MatrixHelper.Matrix secondMatrix = new MatrixHelper.Matrix(secondMatrixArray);
             MatrixHelper.Matrix result = firstMatrix.Add(secondMatrix);
             MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
+            
 
-            Assert.AreEqual(result, correctMatrix);
+            Assert.AreEqual(correctMatrix, result);
         }
     }
 }

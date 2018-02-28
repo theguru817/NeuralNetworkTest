@@ -6,12 +6,12 @@ namespace NeuralNetworkTest.MatrixHelper
 {
     public class Matrix
     {
-        public List<MatrixRow> matrixData;
+        private List<MatrixRow> matrixData;
 
         public Matrix(double[][] marray)
         {
             matrixData = new List<MatrixRow>();
-            for (int i = 0; i < marray.Length; i++)
+            for (int i = 0; i < marray.GetLength(0); i++)
             {
                 MatrixRow mRow = new MatrixRow(marray[i]);
                 matrixData.Add(mRow);
@@ -21,7 +21,6 @@ namespace NeuralNetworkTest.MatrixHelper
         public Matrix()
         {
             matrixData = new List<MatrixRow>();
-
         }
 
         public void ScalarMultiply(double scalarFactor)
@@ -46,20 +45,51 @@ namespace NeuralNetworkTest.MatrixHelper
             {
                 for (int i = 0; i < matrixData.Count; i++)
                 {
+                    resultMatrix.matrixData.Add(new MatrixRow());
                     for (int k = 0; k < mSecondColCount; k++)
                     {
-                        double currentResult = resultMatrix.matrixData[i].matrixColData[k].mdata;
+                        double result = 0;
                         for (int j = 0; j < mFirstColCount; j++)
                         {
                             double firstMatrixItem = matrixData[i].matrixColData[j].mdata;
                             double secondMatrixItem = secondMatrix.matrixData[j].matrixColData[k].mdata;
-                            currentResult += firstMatrixItem * secondMatrixItem;
+                            result += firstMatrixItem * secondMatrixItem;
                         }
+                        resultMatrix.matrixData[i].matrixColData.Add(new MatrixCol(result));
                     }
                 }
             }
 
             return resultMatrix;
+        }
+
+        public override bool Equals(object obj)
+        {
+            Matrix toCompareWith = obj as Matrix;
+            int mFirstRowCount = matrixData.Count;
+            int mFirstColCount = matrixData[0].matrixColData.Count;
+            int mSecondRowCount = toCompareWith.matrixData.Count;
+            int mSecondColCount = toCompareWith.matrixData[0].matrixColData.Count;
+
+            if (toCompareWith is null || 
+                 mSecondRowCount != mFirstRowCount || 
+                 mSecondColCount != mFirstColCount)
+                return false;
+
+            int numEqual = 0;
+            for (int i=0; i<mFirstRowCount; i++)
+            {
+                for (int j=0; j<mFirstColCount; j++)
+                {
+                    if (Math.Round(toCompareWith.matrixData[i].matrixColData[j].mdata,6) == Math.Round(matrixData[i].matrixColData[j].mdata,6))
+                        numEqual++;
+                }
+            }
+
+            if (numEqual == mFirstRowCount * mFirstColCount)
+                return true;
+
+            return false;
         }
 
         public Matrix Add(Matrix secondMatrix)
@@ -74,12 +104,12 @@ namespace NeuralNetworkTest.MatrixHelper
             {
                 for (int i=0; i<mFirstRowCount; i++)
                 {
+                    resultMatrix.matrixData.Add(new MatrixRow());
                     for (int j=0; j<mFirstColCount; j++)
                     {
-                        double currentResult = resultMatrix.matrixData[i].matrixColData[j].mdata;
                         double firstMatrixItem = matrixData[i].matrixColData[j].mdata;
                         double secondMatrixItem = secondMatrix.matrixData[i].matrixColData[j].mdata;
-                        currentResult = firstMatrixItem + secondMatrixItem;
+                        resultMatrix.matrixData[i].matrixColData.Add(new MatrixCol(firstMatrixItem + secondMatrixItem));
                     }
                 }
             }
@@ -95,9 +125,10 @@ namespace NeuralNetworkTest.MatrixHelper
 
             for (int i=0; i<matrixColCount; i++)
             {
+                resultMatrix.matrixData.Add(new MatrixRow());
                 for (int j = 0; j < matrixRowCount; j++)
                 {
-                    resultMatrix.matrixData[i].matrixColData[j].mdata = matrixData[j].matrixColData[i].mdata;
+                    resultMatrix.matrixData[i].matrixColData.Add(new MatrixCol(matrixData[j].matrixColData[i].mdata));
                 }
             }
 
@@ -116,9 +147,10 @@ namespace NeuralNetworkTest.MatrixHelper
             {
                 for (int i = 0; i < mFirstRowCount; i++)
                 {
+                    resultMatrix.matrixData.Add(new MatrixRow());
                     for (int j = 0; j < mFirstColCount; j++)
                     {
-                        resultMatrix.matrixData[i].matrixColData[j].mdata = matrixData[i].matrixColData[j].mdata * secondMatrix.matrixData[i].matrixColData[j].mdata;
+                        resultMatrix.matrixData[i].matrixColData.Add(new MatrixCol(matrixData[i].matrixColData[j].mdata * secondMatrix.matrixData[i].matrixColData[j].mdata));
                     }
                 }
             }
@@ -128,7 +160,7 @@ namespace NeuralNetworkTest.MatrixHelper
 
     }
 
-    public class MatrixRow
+    internal class MatrixRow
     {
         internal List<MatrixCol> matrixColData;
 
@@ -143,6 +175,10 @@ namespace NeuralNetworkTest.MatrixHelper
 
         }
 
+        internal MatrixRow()
+        {
+            matrixColData = new List<MatrixCol>();
+        }
 
     }
 
