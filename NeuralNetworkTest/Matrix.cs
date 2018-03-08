@@ -29,7 +29,7 @@ namespace NeuralNetworkTest.MatrixHelper
             {
                 foreach (MatrixCol colValues in rows.matrixColData)
                 {
-                    colValues.mdata -= scalarFactor;
+                    colValues.mdata /= scalarFactor;
                 }
             }
         }
