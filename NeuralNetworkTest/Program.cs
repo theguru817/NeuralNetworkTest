@@ -1,12 +1,18 @@
-﻿using System;
+﻿using NeuralNetworkTest.MatrixHelper;
+using System;
 
 namespace NeuralNetworkTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            double[,] inputArray = new double[,] { { 1 }, { 0 } };
+            NeuralNetwork nn = new NeuralNetwork(inputArray, 2, 1);
+            Matrix ffResult = nn.PerformFeedForward();
+
+            Console.WriteLine("Done.");
+            Console.ReadLine();
         }
     }
 }
