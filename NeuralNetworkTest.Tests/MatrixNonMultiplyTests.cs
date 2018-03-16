@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NeuralNetworkTest.MatrixHelper;
 
 namespace NeuralNetworkTest.Tests
 {
@@ -17,9 +18,9 @@ namespace NeuralNetworkTest.Tests
                 {8, 6, 5 }
             };
 
-            MatrixHelper.Matrix firstMatrix = new MatrixHelper.Matrix(firstMatrixArray);
-            MatrixHelper.Matrix result = firstMatrix.Transpose();
-            MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
+            Matrix firstMatrix = new Matrix(firstMatrixArray);
+            Matrix result = firstMatrix.Transpose();
+            Matrix correctMatrix = new Matrix(correctMatrixArray);
 
             Assert.AreEqual(result, correctMatrix);
         }
@@ -39,10 +40,10 @@ namespace NeuralNetworkTest.Tests
                 {3+1, 5+3, 6+4},
                 {7+9, 2+7, 5+2}
             };
-            MatrixHelper.Matrix firstMatrix = new MatrixHelper.Matrix(firstMatrixArray);
-            MatrixHelper.Matrix secondMatrix = new MatrixHelper.Matrix(secondMatrixArray);
-            MatrixHelper.Matrix result = firstMatrix.Add(secondMatrix);
-            MatrixHelper.Matrix correctMatrix = new MatrixHelper.Matrix(correctMatrixArray);
+            Matrix firstMatrix = new Matrix(firstMatrixArray);
+            Matrix secondMatrix = new Matrix(secondMatrixArray);
+            Matrix result = firstMatrix.Add(secondMatrix);
+            Matrix correctMatrix = new Matrix(correctMatrixArray);
 
             Assert.AreEqual(correctMatrix, result);
         }

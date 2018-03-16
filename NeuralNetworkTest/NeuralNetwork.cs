@@ -48,14 +48,38 @@ namespace NeuralNetworkTest
             hiddenWeightsMatrix = new MatrixHelper.Matrix(hiddenWeightsArray);
         }
 
-        public MatrixHelper.Matrix PerformFeedForward()
+        public void PerformFeedForward()
         {
             InitializeWeights();
 
-            hiddenNodes = inputWeightsMatrix.DotMultiply(inputNodes);
-            outputNodes = hiddenWeightsMatrix.DotMultiply(hiddenNodes);
+            double[,] hiddenBiasArray = new double[numHiddenNodes, 1];
+            for (int i=0; i< numHiddenNodes; i++)
+            {
+                hiddenBiasArray[i, 0] = (new Random()).NextDouble();
+            }
 
-            return outputNodes;
+            MatrixHelper.Matrix hiddenBias = new MatrixHelper.Matrix(hiddenBiasArray);
+
+            double[,] outputBiasArray = new double[numOutputNodes, 1];
+            for (int i = 0; i < numOutputNodes; i++)
+            {
+                outputBiasArray[i, 0] = (new Random()).NextDouble();
+            }
+
+            MatrixHelper.Matrix outputBias = new MatrixHelper.Matrix(outputBiasArray);
+
+            hiddenNodes = inputWeightsMatrix.DotMultiply(inputNodes).Add(hiddenBias);
+            outputNodes = hiddenWeightsMatrix.DotMultiply(hiddenNodes).Add(outputBias);
+
         }
+
+        public void PerformBackPropogation(MatrixHelper.Matrix desiredOutput)
+        { 
+            MatrixHelper.Matrix outputNeg = outputNodes.ScalarMultiply(-1);
+            MatrixHelper.Matrix outputError = desiredOutput.Add(outputNeg);
+            
+
+        }
+
     }
 }

@@ -9,7 +9,7 @@ namespace NeuralNetworkTest
         {
             double[,] inputArray = new double[,] { { 1 }, { 0 } };
             NeuralNetwork nn = new NeuralNetwork(inputArray, 2, 1);
-            Matrix ffResult = nn.PerformFeedForward();
+            nn.PerformFeedForward();
 
             Console.WriteLine("Done.");
             Console.ReadLine();
