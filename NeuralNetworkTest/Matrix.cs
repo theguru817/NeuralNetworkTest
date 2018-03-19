@@ -205,9 +205,9 @@ namespace NeuralNetworkTest.MatrixHelper
 
     public class MatrixCol
     {
-        internal double data;
+        public double data;
 
-        internal MatrixCol(double data)
+        public MatrixCol(double data)
         {
             this.data = data;
         }
