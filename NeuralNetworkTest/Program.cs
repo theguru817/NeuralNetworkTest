@@ -10,13 +10,12 @@ namespace NeuralNetworkTest
             double[,] inputArray = new double[,] { { 1 }, { 0 } };
             double[,] outputArray = new double[,] { { 1 } };
             Matrix desiredOutput = new Matrix(outputArray);
-            NeuralNetwork nn = new NeuralNetwork(inputArray, 2, 1);
+            NeuralNetwork nn = new NeuralNetwork(2, 1);
 
-            nn.PerformFeedForward();
-            nn.PerformBackPropogation(desiredOutput);
-            nn.PerformFeedForward();
+            nn.Train(inputArray, outputArray, 5);
+            Matrix guess = nn.Guess(inputArray);
 
-            Console.WriteLine("Done.");
+            Console.WriteLine(String.Format("Guess:{0}",guess[0][0].data));
             Console.ReadLine();
         }
     }

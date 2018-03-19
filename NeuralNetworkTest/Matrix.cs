@@ -28,6 +28,23 @@ namespace NeuralNetworkTest.MatrixHelper
            
         }
 
+        public Matrix ApplyFunction(Func<double,double> functionToApply)
+        {
+            Matrix resultMatrix = new Matrix();
+
+            for (int i=0; i<Count; i++)
+            {
+                double[] resultantRow = new double[this[0].Count];
+                for (int j= 0; j < this[0].Count; j++)
+                {
+                    resultantRow[j] = functionToApply(this[i][j].data);
+                }
+                resultMatrix.Add(new MatrixRow(resultantRow));
+            }
+
+            return resultMatrix;
+        }
+
         public Matrix ScalarMultiply(double scalarFactor)
         {
             Matrix resultMatrix = new Matrix();
