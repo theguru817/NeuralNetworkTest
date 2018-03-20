@@ -117,8 +117,9 @@ namespace NeuralNetworkTest.MatrixHelper
             }
 
             if (numEqual == mFirstRowCount * mFirstColCount)
+            {
                 return true;
-
+            }
             return false;
         }
 
